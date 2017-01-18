@@ -185,26 +185,6 @@ test('space-separates and URI-encodes multiple search params', function (t) {
   })
 })
 
-test('passes excludes as !<foo>', function (t) {
-  // pending server stuff
-  setup()
-  server.get(SEARCH + '?text=foo%20!bar&size=1').once().reply(200, {
-    objects: []
-  })
-  var s = esearch({
-    include: ['foo'],
-    exclude: ['bar'],
-    limit: 1
-  })
-  s.on('data', function () {})
-  finished(s, function (err) {
-    if (err) { throw err }
-    t.ok(true, 'request sent with correct params')
-    server.done()
-    t.done()
-  })
-})
-
 test('cleanup', function (t) {
   server.close()
   cleanup()
